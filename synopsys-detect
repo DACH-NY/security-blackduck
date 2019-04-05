@@ -36,7 +36,7 @@ DETECT_VERSION="5.3.2"
 DETECT_SHA256_SUM="c81fe727cecc2d59265ddf08de126d9eafe9117b57b762733961d3726e7593a8  synopsys-detect-5.3.2.jar"
 
 # The local directory for the Hub Direct JAR
-DETECT_JAR_PATH=${DETECT_JAR_PATH:-.}
+DETECT_JAR_PATH="${HOME}/blackduck/bin"
 
 # If you want to pass any java options to the invocation, specify this variable.
 # For example to specify a 6 gigabyte heap size, you would set
@@ -111,7 +111,7 @@ get_hub_detect_jar() {
 
 # Verify the checksum
 verify_detect_jar_checksum() {
-    if ! shasum -a 256 -c <<< "${DETECT_SHA256_SUM}" &>/dev/null; then
+    if ! (cd "${DETECT_JAR_PATH}" && shasum -a 256 -c <<< "${DETECT_SHA256_SUM}") &>/dev/null; then
         errcho "SHA-256 checksum of ${DETECT_PATH} failed!"
         exit 1
     fi
