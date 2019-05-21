@@ -48,7 +48,7 @@ HUB_DETECT_URL="https://digitalasset.blackducksoftware.com/"
 
 # to wait for connections to Black Duck to complete. The Hub Detect tool
 # default is 120 seconds.
-HUB_DETECT_TIMEOUT="240"
+HUB_DETECT_TIMEOUT="480"
 
 # The depth from directory this script is run from to search for files (such as
 # manifest files) for detectors to publish
