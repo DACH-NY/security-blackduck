@@ -30,10 +30,10 @@ ci-release scan type arguments:
 "
 
 # Version to use
-DETECT_VERSION="5.6.2"
+DETECT_VERSION="6.1.0"
 
 # SHA-256 checksum of Synopsys Detect jar
-DETECT_SHA256_SUM="0187ef294b6a7af210236b14470e7eac854413ab06de38419d289cf33508ffd7  synopsys-detect-5.6.2.jar"
+DETECT_SHA256_SUM="b1da32160a574cd52e6a13e0e669848a2327facbc2dcb25573002c859263e71d  synopsys-detect-6.1.0.jar"
 
 # The local directory for the Hub Direct JAR
 DETECT_JAR_PATH="${HOME}/blackduck/bin"
@@ -191,7 +191,8 @@ run_hub_detect() {
 }
 
 HUB_DETECT_ARGS=("--blackduck.timeout=${HUB_DETECT_TIMEOUT}")
-HUB_DETECT_ARGS+=("--detect.blackduck.signature.scanner.parallel.processors=-1")
+#HUB_DETECT_ARGS+=("--detect.blackduck.signature.scanner.parallel.processors=-1")
+HUB_DETECT_ARGS+=("--detect.parallel.processors=true")
 HUB_DETECT_ARGS+=("--detect.detector.search.depth=${HUB_DETECT_DETECTOR_SEARCH_DEPTH}")
 HUB_DETECT_ARGS+=("--detect.blackduck.signature.scanner.exclusion.pattern.search.depth=${HUB_DETECT_DETECTOR_SEARCH_DEPTH}")
 
