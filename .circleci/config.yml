@@ -6,7 +6,7 @@ executors:
       - image: circleci/openjdk:8-jdk
 
 jobs:
-  blackduck-scan:
+  build:
     executor: jdk-executor
     steps:
       - run:
