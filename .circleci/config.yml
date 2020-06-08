@@ -7,11 +7,13 @@ executors:
 
 jobs:
   build:
+    working_directory: ~/build
     executor: jdk-executor
     steps:
+      - checkout
       - run:
           name: Run Blackduck Detect
           command: |
-            synopsys-detect \
+            ./synopsys-detect \
             ci-build DACH-NY_security-blackduck master \
             --logging.level.com.synopsys.integration=DEBUG
