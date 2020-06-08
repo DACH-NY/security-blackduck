@@ -7,7 +7,6 @@ executors:
 
 jobs:
   build:
-    context: blackduck
     working_directory: ~/build
     executor: jdk-executor
     steps:
@@ -19,3 +18,9 @@ jobs:
             ci-build DACH-NY_security-blackduck master \
             --logging.level.com.synopsys.integration=DEBUG
 
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build:
+          context: blackduck
