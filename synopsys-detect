@@ -30,11 +30,10 @@ ci-release scan type arguments:
 "
 
 # Version to use
-DETECT_VERSION="6.4.0-SNAPSHOT"
-DETECT_FILENAME="synopsys-detect-6.4.0-20200615.220850-182"
+DETECT_VERSION="6.3.0"
 
 # SHA-256 checksum of Synopsys Detect jar
-DETECT_SHA256_SUM="0a88b4c38f52a1211066b97e95d10564d8dce8d361a91a39d1213d7aa348d957  ${DETECT_FILENAME}.jar"
+DETECT_SHA256_SUM="8e47aeba35bf34669275d5f646d906a1c2fd2492241c5b87b1776288ceb30302  synopsys-detect-6.3.0.jar"
 
 # The local directory for the Hub Direct JAR
 DETECT_JAR_PATH="${HOME}/blackduck/bin"
@@ -94,7 +93,7 @@ get_hub_detect_jar() {
     mkdir -p "${DETECT_JAR_PATH}"
   fi
 
-  DETECT_SOURCE="https://repo.blackducksoftware.com/artifactory/bds-integrations-snapshot/com/synopsys/integration/synopsys-detect/${DETECT_VERSION}/${DETECT_FILENAME}.jar"
+  DETECT_SOURCE="https://repo.blackducksoftware.com/artifactory/bds-integrations-release/com/synopsys/integration/synopsys-detect/${DETECT_VERSION}/synopsys-detect-${DETECT_VERSION}.jar"
   DETECT_FILENAME=$(awk -F "/" '{print $NF}' <<< ${DETECT_SOURCE})
   DETECT_PATH="${DETECT_JAR_PATH}/${DETECT_FILENAME}"
 
