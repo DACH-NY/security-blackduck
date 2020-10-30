@@ -20,7 +20,13 @@ To enable the scan, add the command below to your CircleCI config file (usually 
 
 ### Frequency of scan
 
-It is possible to run a scan on every pull request
+It is possible to run a scan on every pull request, but this is often excessively time consuming or wasteful as most pull requests do not introduce new third party library versions.  If you want to run the scan on every pull request, simply add in the task as outlined above into your main build pipeline.
+
+It is also possible to only run the scan on master pull requests, but the disadvantage then is that you will not get early warning on any issues until changes are merged to master
+
+The compromise that seems to work for most projects is to automatically have a daily scheduled job which runs the scan (so your scan results are reasonably up to date), causing that daily scan to fail if there is a policy failure, and email and/or slack notification of the daily scan failure triggers investigation and remediation of the problematic dependency by the project owner.
+
+Additionally, you can create a rule that allows the blackduck scan to be run on any branch named blackduck-* so you are able to test and verify any changes you make to the scan job on a branch before being merged to master
 
 ### Enabling daily scheduled scan
 
