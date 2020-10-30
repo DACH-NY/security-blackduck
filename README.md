@@ -18,6 +18,9 @@ To enable the scan, add the command below to your CircleCI config file (usually 
           command: |
             bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) ci-build digitalasset_ex-healthcare-claims-processing master --logging.level.com.synopsys.integration=DEBUG  --detect.notices.report=true --detect.report.timeout=480
 
+### Enabling scan in Azure
+
+
 ### Frequency of scan
 
 It is possible to run a scan on every pull request, but this is often excessively time consuming or wasteful as most pull requests do not introduce new third party library versions.  If you want to run the scan on every pull request, simply add in the task as outlined above into your main build pipeline.
@@ -64,10 +67,20 @@ workflows:
       - blackduck-build:
           context: blackduck
 
-### Configuring to run in Azure
 
 ### Generating NOTICES file
 
 ### Failing build on policy failure
+
+### Scanning Docker Images
+
+### Reference on all scan properties
+A full list of all properties of Detect and input and output codes can be found at 
+
+Detect https://blackducksoftware.github.io/synopsys-detect/6.0.0/ 
+Blackduck Detect Wiki https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/62423113/Synopsys+Detect
+
+## Getting Access to Blackduck Hub
+
 
 ## Running Locally
