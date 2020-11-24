@@ -174,7 +174,9 @@ set_scan_vars_ci_release() {
   local project_name="$1"
   local release_version="$2"
   HUB_DETECT_ARGS+=("--detect.project.name=${project_name}")
-  HUB_DETECT_ARGS+=("--detect.code.location.name=${project_name}_${release_version}_${timestamp}")
+  HUB_DETECT_ARGS+=("--detect.code.location.name=${project_name}_${release_version}")
+  HUB_DETECT_ARGS+=("--detect.code.location.prefix=${timestamp}")
+  HUB_DETECT_ARGS+=("--detect.code.location.unmap=true")
   HUB_DETECT_ARGS+=("--detect.project.version.name=${release_version}")
   HUB_DETECT_ARGS+=("--detect.project.version.phase=released")
   ret_val=2
