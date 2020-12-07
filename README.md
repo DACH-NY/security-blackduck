@@ -48,13 +48,13 @@ A synopsys-detect helper script (present in this repository) is provided to keep
 To enable the scan, add the command below to your CircleCI config file (usually .circleci/config.xml) as below
 ```
   - run:
-          name: Run Blackduck Detect
-          command: |
-            bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) \
-            ci-build ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME} ${CIRCLE_BRANCH} \
-            --logging.level.com.synopsys.integration=DEBUG  \
-            --detect.notices.report=true \
-            --detect.report.timeout=480
+       name: Run Blackduck Detect
+       command: |
+          bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) \
+          ci-build ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME} ${CIRCLE_BRANCH} \
+          --logging.level.com.synopsys.integration=DEBUG  \
+          --detect.notices.report=true \
+          --detect.report.timeout=480
 ```
 ### Enabling scan in Azure
 
