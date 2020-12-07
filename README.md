@@ -13,11 +13,16 @@ A synopsys-detect helper script (present in this repository) is provided to keep
 ### Enabling scan in CircleCI
 
 To enable the scan, add the command below to your CircleCI config file (usually .circleci/config.xml) as below
+```
   - run:
           name: Run Blackduck Detect
           command: |
-            bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) ci-build digitalasset_ex-healthcare-claims-processing master --logging.level.com.synopsys.integration=DEBUG  --detect.notices.report=true --detect.report.timeout=480
-
+            bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) \
+            ci-build digitalasset_ex-healthcare-claims-processing master \
+            --logging.level.com.synopsys.integration=DEBUG  \
+            --detect.notices.report=true \
+            --detect.report.timeout=480
+```
 ### Enabling scan in Azure
 
 
@@ -34,9 +39,9 @@ Additionally, you can create a rule that allows the blackduck scan to be run on 
 ### Enabling daily scheduled scan
 
 In order to schedule as a daily run (rather than on every pull request), you can setup a scheduled daily job similar tot he below
-
+```
 jobs:
-            
+           
   blackduck-build:
     working_directory: ~/builddir
     docker:
@@ -66,7 +71,7 @@ workflows:
     jobs:
       - blackduck-build:
           context: blackduck
-
+```
 
 ### Generating NOTICES file
 
@@ -81,6 +86,11 @@ Detect https://blackducksoftware.github.io/synopsys-detect/6.0.0/
 Blackduck Detect Wiki https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/62423113/Synopsys+Detect
 
 ## Getting Access to Blackduck Hub
+Create a personal Blackduck token by authenticating to the Blackduck site with your DA Google account
+https://digitalasset.blackducksoftware.com/api/current-user/tokens
 
+Click Create New Token and give yourself read and write access, giving a memorable name (<username>-<machine> or similar)
+Copy the contents of this token and define in a local environment variable called BLACKDUCK_HUBDETECT_TOKEN
+```export BLACKDUCK_HUB_DETECT_TOKEN=<token_you_have_just_created>```
 
-## Running Locally
+Once you have created the token, send a mail to security@digitalasset.com to request access to the relevant GitHub projects you are working on with Blackduck.
