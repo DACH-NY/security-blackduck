@@ -151,9 +151,53 @@ workflows:
 
 ### Generating NOTICES file
 
+Whether the NOTICES file is generated or not as part of the scan is determined by the `--detect.notices.report` property, which is set to false by default (do not generate the file.
+
+To generate the file, set this property to true, and the scan will wait for all Blackduck Hub server-side processing to conclude, and the full NOTICES file report to be returned before exiting the scan job.  The NOTICES file will be output to the present working directory as `*_Black_Duck_Notices_Report.txt`.  In most projects, we rename this output file to NOTICES and keep it in the root of the repo.
+
+To automatically update this notices file when it changes, an approach similar to the below can be taken, assuming your CI service account has the ability to commit code back to a working non-master branch on the repo
+
+```
+              #convert windows line endings to unix, strip version line, rename notices file
+              tr -d '\015' <*_Black_Duck_Notices_Report.txt | grep -v ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME} >NOTICES
+              git config user.email "no-reply@digitalasset.com"
+              git config user.name "CircleCI Release Build"
+
+              if [[ $(git add --dry-run NOTICES) ]]; then
+                  echo "There is a change to notices file, committing it back to source"
+                  git add NOTICES
+                  git commit -m'[skip ci] Update NOTICES file'
+                  git push --set-upstream origin ${CIRCLE_BRANCH}
+              else
+                  echo "No change to NOTICES file"
+              fi
+
+```
+
 ### Failing build on policy failure
 
+The addition of the following line will cause the scan build to fail if there are policy violations as a result of the scan
+
+```
+--detect.policy.check.fail.on.severities=MAJOR,CRITICAL,BLOCKER \
+```
+
 ### Scanning Docker Images
+
+Docker images will not be detected and scanned by default if you have Dockerfiles in your repository, you need to explicitly tell Blackduck what docker images to look for to scan
+
+An example for running a scan against a publicly available container on DockerHub is
+```
+bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) ci-build digital-asset_daml-on-fabric hyperledger/fabric-ccenv:2.1.0 --detect.docker.image=hyperledger/fabric-ccenv:2.1.0 --logging.level.com.synopsys.integration=DEBUG --detect.tools=DOCKER --cleanup.inspector.container=true
+```
+
+The same approach can be taken to scan your repository's own images available locally, but you need to run this scan only after you have run `docker build`
+
+You can also target your scan to only focus on layers below a particular layer ID to not detect vulnerabilities on base layers that come from an image on which you depend, but rather to focus on vulnerabilities of layers you have added on top of the base layers.
+
+Full details on Blackduck's Docker Scanning capabilities can be found @ 
+
+https://blackducksoftware.github.io/blackduck-docker-inspector/latest/advanced/
 
 ### Example with exclusions and targeted scans
 
@@ -196,3 +240,5 @@ Detect https://blackducksoftware.github.io/synopsys-detect/6.0.0/
 Blackduck Detect Wiki https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/62423113/Synopsys+Detect
 
 ## Getting Access to Blackduck Hub
+
+Once you have created the token, send a mail to security@digitalasset.com to request access to the relevant GitHub projects you are working on with Blackduck.
