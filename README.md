@@ -26,12 +26,15 @@ Once you are setup with access, you will be able to run a scan of your project l
 1. First run the full build of your project using your build tool of choice (e.g. SBT, Maven, etc)
 
 2. The most basic scan
+```
 bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) \
-            ci-build <github_org_of_project>_<github_repo_of_project> <branch_name>
-            
-            where <github_org_of_project> is typically either DACH-NY or digital-asset
-            <github_repo_or_project> will be your actual repo name in one of these orgs
-            <branch_name> is the name of the branch you are working on to be scanned
+ci-build <github_org_of_project>_<github_repo_of_project> <branch_name>
+```
+
+where
+            `<github_org_of_project>` is typically either DACH-NY or digital-asset
+            `<github_repo_or_project>` will be your actual repo name in one of these orgs
+            `<branch_name>` is the name of the branch you are working on to be scanned
 
 
 ## Adding a scan in CI for your project
@@ -158,20 +161,19 @@ To generate the file, set this property to true, and the scan will wait for all 
 To automatically update this notices file when it changes, an approach similar to the below can be taken, assuming your CI service account has the ability to commit code back to a working non-master branch on the repo
 
 ```
-              #convert windows line endings to unix, strip version line, rename notices file
-              tr -d '\015' <*_Black_Duck_Notices_Report.txt | grep -v ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME} >NOTICES
-              git config user.email "no-reply@digitalasset.com"
-              git config user.name "CircleCI Release Build"
+#convert windows line endings to unix, strip version line, rename notices file
+tr -d '\015' <*_Black_Duck_Notices_Report.txt | grep -v ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME} >NOTICES
+git config user.email "no-reply@digitalasset.com"
+git config user.name "CircleCI Release Build"
 
-              if [[ $(git add --dry-run NOTICES) ]]; then
-                  echo "There is a change to notices file, committing it back to source"
-                  git add NOTICES
-                  git commit -m'[skip ci] Update NOTICES file'
-                  git push --set-upstream origin ${CIRCLE_BRANCH}
-              else
-                  echo "No change to NOTICES file"
-              fi
-
+if [[ $(git add --dry-run NOTICES) ]]; then
+            echo "There is a change to notices file, committing it back to source"
+            git add NOTICES
+            git commit -m'[skip ci] Update NOTICES file'
+            git push --set-upstream origin ${CIRCLE_BRANCH}
+else
+            echo "No change to NOTICES file"
+fi
 ```
 
 ### Failing build on policy failure
@@ -206,15 +208,14 @@ https://blackducksoftware.github.io/blackduck-docker-inspector/latest/advanced/
 Notices the defintion of BAZEL as detect.tools and the specification of `haskell_cabal_library` as the detect.bazel.dependency to look specifically for Haskell third party libraries
 
 ```
-          bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) \
-          ci-build <github_org_of_project>_<github_repo_of_project> <branch_name> \
-          --logging.level.com.synopsys.integration=DEBUG \
-          --detect.tools=BAZEL \
-          --detect.bazel.target=//... \
-          --detect.bazel.dependency.type=haskell_cabal_library \
-          --detect.notices.report=true \
-          --detect.report.timeout=1500
-        displayName: 'Blackduck Haskell Scan'
+bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) \
+ci-build <github_org_of_project>_<github_repo_of_project> <branch_name> \
+--logging.level.com.synopsys.integration=DEBUG \
+--detect.tools=BAZEL \
+--detect.bazel.target=//... \
+--detect.bazel.dependency.type=haskell_cabal_library \
+--detect.notices.report=true \
+--detect.report.timeout=1500
 ```
 
 ## Bazel JVM Scan
@@ -222,15 +223,14 @@ Notices the defintion of BAZEL as detect.tools and the specification of `haskell
 Notices the defintion of BAZEL as detect.tools and the specification of `maven_install` as the detect.bazel.dependency to look specifically for JVM third party libraries -- this will detect both Java and Scala libraries, in fact any third party library that is packaged as a maven-compliant dependency.
 
 ```
-          bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) \
-          ci-build <github_org_of_project>_<github_repo_of_project> <branch_name> \
-          --logging.level.com.synopsys.integration=DEBUG \
-          --detect.tools=BAZEL \
-          --detect.bazel.target=//... \
-          --detect.bazel.dependency.type=maven_install \
-          --detect.notices.report=true \
-          --detect.report.timeout=1500
-        displayName: 'Blackduck Haskell Scan'
+bash <(curl -s https://raw.githubusercontent.com/DACH-NY/security-blackduck/master/synopsys-detect) \
+ci-build <github_org_of_project>_<github_repo_of_project> <branch_name> \
+--logging.level.com.synopsys.integration=DEBUG \
+--detect.tools=BAZEL \
+--detect.bazel.target=//... \
+--detect.bazel.dependency.type=maven_install \
+--detect.notices.report=true \
+--detect.report.timeout=1500
 ```
 
 ### Reference on all scan properties
