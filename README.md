@@ -54,7 +54,7 @@ To enable the scan, add the command below to your CircleCI config file (usually 
           ci-build ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME} ${CIRCLE_BRANCH} \
           --logging.level.com.synopsys.integration=DEBUG  \
           --detect.notices.report=true \
-          --detect.report.timeout=480
+          --detect.timeout=480
 ```
 ### Enabling scan in Azure
 
@@ -76,7 +76,7 @@ This is a more complex multi-part scan taken from the open source DAML repo, whi
           --detect.bazel.target=//... \
           --detect.bazel.dependency.type=haskell_cabal_library \
           --detect.notices.report=true \
-          --detect.report.timeout=1500
+          --detect.timeout=1500
         displayName: 'Blackduck Haskell Scan'
         env:
           BLACKDUCK_HUBDETECT_TOKEN: $(BLACKDUCK_HUBDETECT_TOKEN)
@@ -99,7 +99,7 @@ This is a more complex multi-part scan taken from the open source DAML repo, whi
           --detect.policy.check.fail.on.severities=MAJOR,CRITICAL,BLOCKER \
           --detect.notices.report=true \
           --detect.cleanup.bdio.files=true \
-          --detect.report.timeout=4500
+          --detect.timeout=4500
         displayName: 'Blackduck Scan'
         env:
           BLACKDUCK_HUBDETECT_TOKEN: $(BLACKDUCK_HUBDETECT_TOKEN)
@@ -215,7 +215,7 @@ ci-build <github_org_of_project>_<github_repo_of_project> <branch_name> \
 --detect.bazel.target=//... \
 --detect.bazel.dependency.type=haskell_cabal_library \
 --detect.notices.report=true \
---detect.report.timeout=1500
+--detect.timeout=1500
 ```
 
 ## Bazel JVM Scan
@@ -230,7 +230,7 @@ ci-build <github_org_of_project>_<github_repo_of_project> <branch_name> \
 --detect.bazel.target=//... \
 --detect.bazel.dependency.type=maven_install \
 --detect.notices.report=true \
---detect.report.timeout=1500
+--detect.timeout=1500
 ```
 
 ### Reference on all scan properties
