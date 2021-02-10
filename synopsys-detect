@@ -46,9 +46,8 @@ HUB_DETECT_JAVA_OPTS=${DETECT_JAVA_OPTS:-}
 # URL for our Black Duck
 HUB_DETECT_URL="https://digitalasset.blackducksoftware.com/"
 
-# Timeout to wait for connections to Black Duck to complete. The Hub Detect tool
-# default is 120 seconds.
-HUB_DETECT_TIMEOUT="60"
+# Timeout to wait for connections to Black Duck to complete.
+HUB_DETECT_TIMEOUT="1200"
 
 # The depth from directory this script is run from to search for files (such as
 # manifest files) for detectors to publish
@@ -199,11 +198,8 @@ run_hub_detect() {
   fi
 }
 
-HUB_DETECT_ARGS=("--blackduck.timeout=${HUB_DETECT_TIMEOUT}")
-#HUB_DETECT_ARGS+=("--detect.blackduck.signature.scanner.parallel.processors=-1")
-HUB_DETECT_ARGS+=("--detect.parallel.processors=0")
+HUB_DETECT_ARGS=("--detect.parallel.processors=0")
 HUB_DETECT_ARGS+=("--detect.detector.search.depth=${HUB_DETECT_DETECTOR_SEARCH_DEPTH}")
-HUB_DETECT_ARGS+=("--detect.blackduck.signature.scanner.exclusion.pattern.search.depth=${HUB_DETECT_DETECTOR_SEARCH_DEPTH}")
 
 check_args "$@"
 set_scan_vars "$@"
