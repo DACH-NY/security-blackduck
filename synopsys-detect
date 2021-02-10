@@ -199,7 +199,7 @@ run_hub_detect() {
   fi
 }
 
-HUB_DETECT_ARGS=("--blackduck.timeout=${HUB_DETECT_TIMEOUT}")
+HUB_DETECT_ARGS=("--detect.timeout=${HUB_DETECT_TIMEOUT}")
 #HUB_DETECT_ARGS+=("--detect.blackduck.signature.scanner.parallel.processors=-1")
 HUB_DETECT_ARGS+=("--detect.parallel.processors=0")
 HUB_DETECT_ARGS+=("--detect.detector.search.depth=${HUB_DETECT_DETECTOR_SEARCH_DEPTH}")
