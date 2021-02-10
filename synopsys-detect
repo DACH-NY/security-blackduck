@@ -46,9 +46,6 @@ HUB_DETECT_JAVA_OPTS=${DETECT_JAVA_OPTS:-}
 # URL for our Black Duck
 HUB_DETECT_URL="https://digitalasset.blackducksoftware.com/"
 
-# Timeout to wait for connections to Black Duck to complete.
-HUB_DETECT_TIMEOUT="1200"
-
 # The depth from directory this script is run from to search for files (such as
 # manifest files) for detectors to publish
 HUB_DETECT_DETECTOR_SEARCH_DEPTH="8"
