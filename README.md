@@ -176,6 +176,16 @@ else
 fi
 ```
 
+### Capturing output
+
+Please include store_artifacts to capture output of the job for troubleshooting and support purposes, in case things are not working as planned
+
+```
+- store_artifacts:
+    name: Store the Blackduck run artifacts
+    path: /home/circleci/blackduck/runs
+```
+
 ### Failing build on policy failure
 
 The addition of the following line will cause the scan build to fail if there are policy violations as a result of the scan
