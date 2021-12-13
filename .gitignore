@@ -9,3 +9,4 @@ target
 .bazel-cache/
 .DS_Store
 
+/examples/rules_haskell/examples/.bazel-cache/
