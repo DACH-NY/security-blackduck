@@ -1,2 +1,5 @@
 .idea
+.venv
+.daml
+target
 .DS_Store
