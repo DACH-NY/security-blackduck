@@ -2,6 +2,7 @@
 *.iml
 .venv/
 .daml/
+.gradle/
 target
 
 .bazel-cache/
