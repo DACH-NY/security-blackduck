@@ -6,6 +6,6 @@
 .gradle/
 target
 
-.bazel-cache/*
+.bazel-cache/
 .DS_Store
 
