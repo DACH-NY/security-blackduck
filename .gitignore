@@ -9,7 +9,7 @@ target
 .bazel-cache/
 .DS_Store
 
-**/.bazel-cache
+**/.bazel-cache/**
 
 # Ignore Gradle build output directory
 **/build
