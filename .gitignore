@@ -4,5 +4,6 @@
 .daml/
 target
 
+.bazel-cache/
 .DS_Store
 
