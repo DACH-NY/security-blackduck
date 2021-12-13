@@ -1,5 +1,5 @@
-.idea
-.venv
-.daml
-target
+*/.idea
+*/.venv
+*/.daml
+*/target
 .DS_Store
