@@ -1,0 +1,60 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+
+commands:
+  test_steps:
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: yarn install
+          name: Install dependencies
+      - run:
+          command: yarn test
+          name: Run tests via yarn
+      - run:
+          command: yarn format-check
+          name: Check formatting
+
+jobs:
+  test:
+    executor:
+      name: node/default
+    steps:
+      - test_steps
+
+  test_build_and_publish:
+    executor:
+      name: node/default
+    steps:
+      - test_steps
+      - run:
+          name: Compile TS to JS
+          command: yarn build
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - run:
+          name: Publish package
+          command: .circleci/publish.sh
+
+workflows:
+  test_library:
+    jobs:
+      - test:
+          filters:
+            tags:
+              ignore: /^v.*/
+
+  publish:
+    jobs:
+      - test_build_and_publish:
+          context:
+            - npm-automation
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
