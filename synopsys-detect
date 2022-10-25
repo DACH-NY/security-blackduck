@@ -30,7 +30,7 @@ ci-release scan type arguments:
 "
 
 # Version to use
-DETECT_VERSION="7.14.0"
+DETECT_VERSION="8.2.0"
 
 # SHA-256 checksum of Synopsys Detect jar
 DETECT_SHA256_SUM="c93390fcf7560141b68a520783b2a1aa726d72c930fe12e56bb3a63f4b0784f1  synopsys-detect-8.2.0.jar"
