@@ -33,7 +33,7 @@ ci-release scan type arguments:
 DETECT_VERSION="7.14.0"
 
 # SHA-256 checksum of Synopsys Detect jar
-DETECT_SHA256_SUM="1f3c580dbacc9bf55854e3af21c4dfc6ca40ec446f225c355581f70201619ded  synopsys-detect-7.14.0.jar"
+DETECT_SHA256_SUM="c93390fcf7560141b68a520783b2a1aa726d72c930fe12e56bb3a63f4b0784f1  synopsys-detect-8.2.0.jar"
 
 # The local directory for the Hub Direct JAR
 DETECT_JAR_PATH="${HOME}/blackduck/bin"
