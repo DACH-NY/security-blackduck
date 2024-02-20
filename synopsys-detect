@@ -201,6 +201,14 @@ run_hub_detect() {
 HUB_DETECT_ARGS=("--detect.parallel.processors=0")
 HUB_DETECT_ARGS+=("--detect.detector.search.depth=${HUB_DETECT_DETECTOR_SEARCH_DEPTH}")
 
+echo "circleci env ${CIRCLE_PROJECT_REPONAME}"
+
+if [ -n "${CIRCLE_PROJECT_REPONAME}" ]; then
+	echo "got ci data"
+	HUB_DETECT_ARGS+=("--detect.custom.fields.version[0].label=codeRepoName")
+	HUB_DETECT_ARGS+=("--detect.custom.fields.version[0].value=${CIRCLE_PROJECT_REPONAME}")
+fi
+
 check_args "$@"
 set_scan_vars "$@"
 shift ${scan_vars_arg_count}
