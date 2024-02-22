@@ -201,7 +201,7 @@ run_hub_detect() {
 HUB_DETECT_ARGS=("--detect.parallel.processors=0")
 HUB_DETECT_ARGS+=("--detect.detector.search.depth=${HUB_DETECT_DETECTOR_SEARCH_DEPTH}")
 
-if [ -n "${CIRCLE_PROJECT_REPONAME}" ] && [ -n "${CIRCLE_PROJECT_USERNAME}" ]; then
+if [ -n "${CIRCLE_PROJECT_REPONAME:-}" ] && [ -n "${CIRCLE_PROJECT_USERNAME:-}" ]; then
 	HUB_DETECT_ARGS+=("--detect.custom.fields.version[0].label=codeRepoName")
 	HUB_DETECT_ARGS+=("--detect.custom.fields.version[0].value=${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}")
 fi
