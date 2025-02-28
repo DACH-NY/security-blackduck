@@ -13,7 +13,7 @@ https://digitalasset.blackducksoftware.com/api/current-user/tokens
 
 2. Click Create New Token and give yourself read and write access, giving a memorable name (<username>-<machine> or similar)
 Copy the contents of this token and define in a local environment variable called BLACKDUCK_HUBDETECT_TOKEN
-```export BLACKDUCK_HUB_DETECT_TOKEN=<token_you_have_just_created>```
+```export BLACKDUCK_HUBDETECT_TOKEN=<token_you_have_just_created>```
 
 3. Once you have created the token, send a mail to security@digitalasset.com to request access to the relevant GitHub projects you are working on with Blackduck.
 
