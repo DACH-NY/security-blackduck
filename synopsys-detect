@@ -110,7 +110,7 @@ get_hub_detect_jar() {
 
 # Verify the checksum
 verify_detect_jar_checksum() {
-    if ! (cd "${DETECT_JAR_PATH}" && shasum -a 256 -c <<< "${DETECT_SHA256_SUM}") &>/dev/null; then
+    if ! (cd "${DETECT_JAR_PATH}" && sha256sum -c <<< "${DETECT_SHA256_SUM}") &>/dev/null; then
         errcho "SHA-256 checksum of ${DETECT_PATH} failed!"
         exit 1
     fi
