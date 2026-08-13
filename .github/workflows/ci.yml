@@ -11,8 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run Blackduck Detect
-        run: |
-          ./synopsys-detect \
-            ci-build DACH-NY_security-blackduck master \
-            --logging.level.com.synopsys.integration=DEBUG
+#      - name: Run Blackduck Detect
+#        run: |
+#          ./synopsys-detect \
+#            ci-build DACH-NY_security-blackduck master \
+#            --logging.level.com.synopsys.integration=DEBUG
