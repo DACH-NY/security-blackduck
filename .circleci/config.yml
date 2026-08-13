@@ -3,7 +3,7 @@ version: 2.1
 executors:
   jdk-executor:
     docker:
-      - image: cimg/openjdk:21
+      - image: cimg/openjdk:21.0.12
 
 jobs:
   build:
