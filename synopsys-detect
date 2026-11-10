@@ -30,10 +30,10 @@ ci-release scan type arguments:
 "
 
 # Version to use
-DETECT_VERSION="12.1.0"
+DETECT_VERSION="12.1.1"
 
 # SHA-256 checksum of Synopsys Detect jar
-DETECT_SHA256_SUM="aeab0ae2e80c92f10c1104003a50ce8af326fce5341ae28602ca3ac3fa0641d5  detect-12.1.0.jar"
+DETECT_SHA256_SUM="cab32cc064b2c25573c206ea7a843b8004ea66ba0af545005d193efef18ca325  detect-12.1.1.jar"
 
 # The local directory for the Hub Direct JAR
 DETECT_JAR_PATH="${HOME}/blackduck/bin"
